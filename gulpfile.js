@@ -7,8 +7,9 @@ imagemin = require('gulp-imagemin'),
 cssbeautify = require('gulp-cssbeautify'),
 jsprettify = require('gulp-jsbeautifier'),
 changed = require('gulp-changed'),
-del = require('del')
-;
+del = require('del'),
+fs = require('fs'),
+header = require('gulp-header');
 
 var paths = {
     scss      :'./src/scss/*.scss',
@@ -40,6 +41,7 @@ gulp.task('sass', function() {
     }))
     .pipe(autoprefixer())
     .pipe(cssbeautify())
+    .pipe(header(fs.readFileSync('./src/scss/cssHeader.txt', 'utf8')))
     .pipe(gulp.dest(paths.dist));
 });
 
@@ -74,6 +76,7 @@ gulp.task('clean', function(cb) {
 
 gulp.task('watch', function() {
     gulp.watch(paths.scss,['sass']);
+    gulp.watch('./src/scss/cssHeader.txt',['sass']);
     gulp.watch(paths.php,['php']);
     gulp.watch(paths.functions,['functions']);
     gulp.watch(paths.js,['js']);
