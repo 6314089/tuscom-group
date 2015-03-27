@@ -64,9 +64,6 @@ gulp.task('functions', function() {
     .pipe(gulp.dest(paths.dist+"/functions"));
 });
 
-gulp.task('clean', function(cb) {
-  del(paths.dist, cb);
-});
 
 gulp.task('watch', function() {
     gulp.watch(paths.scss,['sass']);
@@ -77,9 +74,6 @@ gulp.task('watch', function() {
     gulp.watch(paths.image,['image']);
 });
 
-gulp.task('build', ['clean'], function(){
-    gulp.start('create');
-});
 
 gulp.task('create', ['sass','php','functions','js','image']);
-gulp.task('default', ['build','watch']);
+gulp.task('default', ['create','watch']);
