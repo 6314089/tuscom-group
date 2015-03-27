@@ -6,7 +6,6 @@ plumber = require("gulp-plumber"),
 imagemin = require('gulp-imagemin'),
 cssbeautify = require('gulp-cssbeautify'),
 jsprettify = require('gulp-jsbeautifier'),
-changed = require('gulp-changed'),
 del = require('del'),
 fs = require('fs'),
 header = require('gulp-header');
@@ -25,7 +24,6 @@ gulp.task('image', function() {
     gulp
     .src(paths.image)
     .pipe(plumber())
-    .pipe(changed(paths.dist+"/img"))
     .pipe(imagemin())
     .pipe(gulp.dest(paths.dist+"/img"));
 });
@@ -34,7 +32,6 @@ gulp.task('sass', function() {
     gulp
     .src(paths.scss)
     .pipe(plumber())
-    .pipe(changed(paths.dist))
     .pipe(sass({
         errLogToConsole: true,
         sourceComments: 'normal'
@@ -49,7 +46,6 @@ gulp.task('js', function() {
     gulp
     .src(paths.js)
     .pipe(plumber())
-    .pipe(changed(paths.dist+"/js"))
     .pipe(jsprettify())
     .pipe(gulp.dest(paths.dist+"/js"));
 });
@@ -58,7 +54,6 @@ gulp.task('php', function() {
     gulp
     .src(paths.php)
     .pipe(plumber())
-    .pipe(changed(paths.dist))
     .pipe(gulp.dest(paths.dist));
 });
 
@@ -66,7 +61,6 @@ gulp.task('functions', function() {
     gulp
     .src(paths.functions)
     .pipe(plumber())
-    .pipe(changed(paths.dist+"/functions"))
     .pipe(gulp.dest(paths.dist+"/functions"));
 });
 
